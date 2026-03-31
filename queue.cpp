@@ -1,0 +1,80 @@
+#include<iostream>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    Node(int val)
+    {
+        data=val;
+        next=NULL;
+    
+    }
+};
+
+class Queue{
+    public:
+    Node* head;
+    Node* tail;
+
+    Queue(){
+        head=tail=NULL;
+    }
+
+    void push(int data){
+        Node* newNode=new Node(data);
+        if (empty()){
+            head=tail=newNode;
+        }
+        else{
+            tail->next=newNode;
+            tail=newNode;
+        }
+    }
+
+    void pop(){
+        if(empty())
+        {
+            cout<<"Queue is empty\n";
+            return;
+        }
+        else{
+            Node* temp=head;
+            head=head->next;
+            delete temp;
+
+        }
+
+    }
+
+    int front(){
+        if(empty()){
+            cout<<"Queue is empty ";
+            return -1;
+        }
+        else{
+            return head->data;
+
+        }
+    }
+
+    bool empty(){
+        return head==NULL;
+    }
+};
+
+int main()
+{
+    Queue q;
+    q.push(32);
+    q.push(43);
+    q.push(54);
+
+    while(!q.empty()){
+        cout<<q.front()<<" ";
+        q.pop();
+    }
+    
+}
